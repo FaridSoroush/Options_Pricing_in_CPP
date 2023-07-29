@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <fstream> // for file operations
 
 // Parameters for the Geometric Brownian Motion
 double S0 = 100.0;  // Initial price 
@@ -29,15 +30,25 @@ int main() {
     double dt = T / M; // time step
     double sum_payoff = 0.0;
 
+    // Open file for writing
+    std::ofstream file("simulation_results.csv");
+
     // Monte Carlo Simulations
     for(int i=0; i<N; ++i){
         double S = S0;
+        std::ofstream pathfile("path_"+std::to_string(i)+".csv"); //create a new file for each path
         for(int j=0; j<M; ++j){
             double Z = distribution(generator);
             S = GBM(S, r, sigma, Z, dt);
+            pathfile << S << "\n"; // save price at each time step
         }
+        pathfile.close();
         sum_payoff += payoff(S, K);
+
+        // Write final price for this simulation to file
+        file << S << "\n";
     }
+    file.close();
 
     // Calculate option price
     double option_price = exp(-r * T) * (sum_payoff / N);
