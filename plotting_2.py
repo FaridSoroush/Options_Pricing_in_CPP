@@ -1,14 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import glob  # to read multiple files
 
-files = glob.glob('path_*.csv')  # get all path files
+# Load the price paths
+df = pd.read_csv('path.csv', header=None)
 
-for i, file in enumerate(files):
-    df = pd.read_csv(file, header=None, names=['Price'])
-
-    # Plot the price series for each path
-    plt.plot(df['Price'], label=f'Path {i+1}')
+# Plot the price paths with transparency
+for i in range(len(df)):
+    plt.plot(df.loc[i], label=f'Path {i+1}', alpha=0.4) # 'alpha=0.1' makes the lines semi-transparent
 
 plt.title('Price Paths from Monte Carlo Simulation')
 plt.xlabel('Time Step')
