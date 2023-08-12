@@ -19,14 +19,14 @@ plt.ylabel('Frequency')
 plt.legend()
 plt.show()
 
-# # Plot a few paths
-# plt.figure(figsize=(10, 5))
-# for i in range(100):
-#     plt.plot(gbm_paths.loc[i], alpha=0.7, label='GBM' if i == 0 else None)
-#     plt.plot(heston_paths.loc[i], alpha=0.7, label='Heston' if i == 0 else None)
+# Plot a few paths
+plt.figure(figsize=(10, 5))
+for i in range(100):
+    plt.plot(gbm_paths.loc[i], alpha=0.7, label='GBM' if i == 0 else None)
+    plt.plot(heston_paths.loc[i], alpha=0.7, label='Heston' if i == 0 else None)
 
-# plt.title('Simulated Paths')
-# plt.xlabel('Time Step')
-# plt.ylabel('Price')
-# plt.legend()
-# plt.show()
+plt.title('Simulated Paths')
+plt.xlabel('Time Step')
+plt.ylabel('Price')
+plt.legend()
+plt.show()
